@@ -1,29 +1,34 @@
 {
-    "contacts": [
-      {
-        "id": 1,
-        "name": "Alice Muthoni",
-        "email": "alicemuthoni2@gmail.com",
-        "phone": "254 71782350"
-      },
-      {
-        "id": 2,
-        "name": "Bob Junior",
-        "email": "junior.bob@outlook.com",
-        "phone": "254 72682339"
-      },
-      {
-        "id": 3,
-        "name": "Lucious Ben",
-        "email": "lucious23@yahoo.com",
-        "phone": "254 79792947"
-      },
-      {
-        "id": 4,
-        "name": "Peter Roch",
-        "email": "rochpeter1@gmail.com",
-        "phone": "254 73402951"
-      }
-    ]
-  }
-  
+  "contacts": [
+    {
+      "id": "1",
+      "name": "Alice Muthoni",
+      "email": "alicemuthoni2@gmail.com",
+      "phone": "254 71782350"
+    },
+    {
+      "id": "2",
+      "name": "Bob Junior",
+      "email": "junior.bob@outlook.com",
+      "phone": "254 72682339"
+    },
+    {
+      "id": "3",
+      "name": "Lucious Ben",
+      "email": "lucious23@yahoo.com",
+      "phone": "254 79792947"
+    },
+    {
+      "id": "4",
+      "name": "Peter Roch",
+      "email": "rochpeter1@gmail.com",
+      "phone": "254 73402951"
+    },
+    {
+      "id": "d4e0",
+      "name": "Roddy Rich",
+      "email": "richroddy42@hotmail.com",
+      "phone": "1 636 8325 235"
+    }
+  ]
+}
