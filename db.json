@@ -1,10 +1,10 @@
 {
   "contacts": [
     {
-      "id": "1",
-      "name": "Alice Muthoni",
+      "name": "Alice Mupa",
       "email": "alicemuthoni2@gmail.com",
-      "phone": "254 71782350"
+      "phone": "254 71782350",
+      "id": "1"
     },
     {
       "id": "2",
