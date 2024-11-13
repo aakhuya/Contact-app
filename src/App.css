@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.contact-app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.contact-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+form input {
+  margin-right: 10px;
+  padding: 5px;
+}
+
