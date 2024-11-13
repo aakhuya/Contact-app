@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ContactList from './ContactList';
 import ContactForm from './ContactForm';
 import SearchBar from './SearchBar';
@@ -7,7 +8,6 @@ import './App.css';
 function App() {
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [editContact, setEditContact] = useState(null);
 
   useEffect(() => {
     fetchContacts();
@@ -23,7 +23,7 @@ function App() {
     const response = await fetch('http://localhost:5000/contacts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(contact)
     });
     const newContact = await response.json();
     setContacts([...contacts, newContact]);
@@ -34,36 +34,36 @@ function App() {
     setContacts(contacts.filter(contact => contact.id !== id));
   };
 
-  const updateContact = async (id, updatedContact) => {
-    const response = await fetch(`http://localhost:5000/contacts/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedContact),
-    });
-    const updated = await response.json();
-    setContacts(contacts.map(contact => (contact.id === id ? updated : contact)));
-    setEditContact(null);
-  };
-
   return (
-    <div className="contact-app">
-      <h1>Contact Management App</h1>
-      <SearchBar setSearchTerm={setSearchTerm} />
-      <ContactForm 
-        addContact={addContact} 
-        editContact={editContact} 
-        updateContact={updateContact} 
-      />
-      <ContactList 
-        contacts={contacts} 
-        searchTerm={searchTerm} 
-        deleteContact={deleteContact} 
-        setEditContact={setEditContact}
-      />
-    </div>
+    <Router>
+      <div className="contact-app">
+        <nav className="navbar">
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/add-contact">Add Contact</Link></li>
+          </ul>
+          
+          <SearchBar setSearchTerm={setSearchTerm} />
+        </nav>
+
+        <Routes>
+          <Route path="/" element={
+            <>
+              <h1>Contact Management App</h1>
+              <ContactList contacts={contacts} searchTerm={searchTerm} deleteContact={deleteContact} />
+            </>
+          } />
+
+          <Route path="/add-contact" element={
+            <>
+              <h1>Add a New Contact</h1>
+              <ContactForm addContact={addContact} />
+            </>
+          } />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
 export default App;
-
-
