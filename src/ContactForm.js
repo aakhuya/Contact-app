@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
-function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
+function ContactForm({ addOrUpdateContact, editContact, setEditContact, isAddMode }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');  // State for success message
-
-  const navigate = useNavigate();  // Initialize the useNavigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (editContact) {
@@ -21,7 +19,7 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
     }
   }, [editContact]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const contact = {
@@ -31,20 +29,21 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
       phone,
     };
 
-    // Add or update the contact
-    await addOrUpdateContact(contact);
+    addOrUpdateContact(contact);
 
-    // Display success message
-    setSuccessMessage(editContact ? 'Contact updated successfully!' : 'Contact added successfully!');
+    setName('');
+    setEmail('');
+    setPhone('');
+    setEditContact(null);
 
-    // Redirect to the homepage after a short delay
-    setTimeout(() => {
-      navigate('/');  // Navigate back to homepage
-    }, 1500);  // Delay before redirect to show the success message
+    if (isAddMode) {
+      navigate('/');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="contact-form">
+      <h2>{isAddMode ? 'Add a New Contact' : 'Edit Contact'}</h2>
       <input
         type="text"
         placeholder="Name"
@@ -63,21 +62,15 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
-      
-      {/* Show success message if the contact was added or updated */}
-      {successMessage && <div className="success-message">{successMessage}</div>}
-
-      <button
-        type="submit"
-        className={editContact ? 'edit-button' : 'add-contact-button'}
-      >
-        {editContact ? 'Update Contact' : 'Add Contact'}
-      </button>
+      <button type="submit">{isAddMode ? 'Add Contact' : 'Update Contact'}</button>
     </form>
   );
 }
 
 export default ContactForm;
+
+
+
 
 
 
