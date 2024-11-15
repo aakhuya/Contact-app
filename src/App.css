@@ -9,18 +9,20 @@
 }
 
 .navbar {
+  display: flex;               
+  justify-content: space-between;
+  align-items: center;         
   background-color: #333;
-  padding: 15px 0;
-  border-radius: 8px 8px 0 0;
+  padding: 15px 20px;          
+  border-radius: 8px 8px 0 0;  
   margin-bottom: 20px;
 }
 
 .navbar ul {
   list-style-type: none;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+  display: flex;              
+  gap: 20px;                   
 }
 
 .navbar ul li {
@@ -38,6 +40,20 @@
 
 .navbar a:hover {
   background-color: #555;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: flex-end;  
+  width: 100%;                
+}
+
+.search-bar-container input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-left: 10px;
 }
 
 .contact-list, .contact-form {
@@ -95,6 +111,7 @@ button {
 .add-contact-button:hover, .edit-button:hover {
   background-color: #45a049;
   transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .delete-button {
@@ -105,16 +122,51 @@ button {
 .delete-button:hover {
   background-color: #da190b;
   transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .contact-list .contact-item .contact-details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .contact-form {
+    width: 90%;
+    margin: 20px auto;
+  }
 }
 
 .success-message {
-  background-color: #28a745; /* Green background */
+  background-color: #28a745;
   color: white;
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
   text-align: center;
   font-weight: bold;
-  transition: opacity 1s ease-in-out;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out forwards;
 }
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 

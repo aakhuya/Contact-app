@@ -26,6 +26,3 @@ function ContactList({ contacts, searchTerm, deleteContact, setEditContact }) {
 }
 
 export default ContactList;
-
-
-
