@@ -1,4 +1,109 @@
-* {
+/* Main App container */
+.contact-app {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #333;
+  padding: 15px 0;
+  border-radius: 8px 8px 0 0; /* Rounded top corners */
+  margin-bottom: 20px;
+}
+
+.navbar ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar a {
+  color: #ffffff;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #555; /* Darken on hover */
+}
+
+/* Contact List and Form container styling */
+.contact-list, .contact-form {
+  margin-top: 30px;
+}
+
+/* Contact form styling */
+.contact-form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Add Contact button styling */
+.add-contact-button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.add-contact-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Edit button styling */
+.edit-button {
+  background-color: #2196F3; /* Blue */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #0b7dda;
+  transform: scale(1.05);
+}
+
+/* Delete button styling */
+.delete-button {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #da190b;
+  transform: scale(1.05);
+}
+
+
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -211,4 +316,4 @@ h1 {
 
 .search-bar button:hover {
   background-color: #0056b3;
-}
+} */

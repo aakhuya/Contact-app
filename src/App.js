@@ -8,57 +8,95 @@ import './App.css';
 function App() {
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [editContact, setEditContact] = useState(null);
 
   useEffect(() => {
     fetchContacts();
   }, []);
 
   const fetchContacts = async () => {
-    const response = await fetch('http://localhost:5000/contacts');
-    const data = await response.json();
-    setContacts(data);
+    try {
+      const response = await fetch('http://localhost:5000/contacts');
+      const data = await response.json();
+      setContacts(data);
+    } catch (error) {
+      console.error("Error fetching contacts:", error);
+    }
   };
 
-  const addContact = async (contact) => {
-    const response = await fetch('http://localhost:5000/contacts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(contact)
-    });
-    const newContact = await response.json();
-    setContacts([...contacts, newContact]);
+  const addOrUpdateContact = async (contact) => {
+    if (contact.id) {
+      try {
+        await fetch(`http://localhost:5000/contacts/${contact.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(contact),
+        });
+        setContacts(contacts.map((c) => (c.id === contact.id ? contact : c)));
+      } catch (error) {
+        console.error("Error updating contact:", error);
+      }
+    } else {
+      try {
+        const response = await fetch('http://localhost:5000/contacts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(contact),
+        });
+        const newContact = await response.json();
+        setContacts([...contacts, newContact]);
+      } catch (error) {
+        console.error("Error adding contact:", error);
+      }
+    }
+    setEditContact(null);
   };
 
   const deleteContact = async (id) => {
-    await fetch(`http://localhost:5000/contacts/${id}`, { method: 'DELETE' });
-    setContacts(contacts.filter(contact => contact.id !== id));
+    try {
+      await fetch(`http://localhost:5000/contacts/${id}`, { method: 'DELETE' });
+      setContacts(contacts.filter((contact) => contact.id !== id));
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+    }
   };
 
   return (
     <Router>
       <div className="contact-app">
+        <h1>Contact Management App</h1>
         <nav className="navbar">
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/add-contact">Add Contact</Link></li>
           </ul>
-          
           <SearchBar setSearchTerm={setSearchTerm} />
         </nav>
 
         <Routes>
           <Route path="/" element={
             <>
-              <h1>Contact Management App</h1>
-              <ContactList contacts={contacts} searchTerm={searchTerm} deleteContact={deleteContact} />
+              <ContactList
+                contacts={contacts}
+                searchTerm={searchTerm}
+                deleteContact={deleteContact}
+                setEditContact={setEditContact}
+              />
+              {editContact && (
+                <ContactForm
+                  addOrUpdateContact={addOrUpdateContact}
+                  editContact={editContact}
+                  setEditContact={setEditContact}
+                />
+              )}
             </>
           } />
-
           <Route path="/add-contact" element={
-            <>
-              <h1>Add a New Contact</h1>
-              <ContactForm addContact={addContact} />
-            </>
+            <ContactForm
+              addOrUpdateContact={addOrUpdateContact}
+              setEditContact={setEditContact}
+              isAddMode={true}
+            />
           } />
         </Routes>
       </div>
@@ -67,3 +105,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function ContactForm({ addContact, editContact, updateContact }) {
+function ContactForm({ addOrUpdateContact, editContact, setEditContact, isAddMode }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (editContact) {
@@ -19,46 +21,55 @@ function ContactForm({ addContact, editContact, updateContact }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const contact = { name, email, phone };
 
-    if (editContact) {
-      updateContact(editContact.id, contact);
-    } else {
-      addContact(contact);
-    }
+    const contact = {
+      id: editContact ? editContact.id : undefined,
+      name,
+      email,
+      phone,
+    };
 
-    // Reset form fields after submit
+    addOrUpdateContact(contact);
+
     setName('');
     setEmail('');
     setPhone('');
+    setEditContact(null);
+
+    if (isAddMode) {
+      navigate('/');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="contact-form">
-      <input 
-        type="text" 
-        placeholder="Name" 
-        value={name} 
-        onChange={(e) => setName(e.target.value)} 
-        required
+      <h2>{isAddMode ? 'Add a New Contact' : 'Edit Contact'}</h2>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-      <input 
-        type="email" 
-        placeholder="Email" 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)} 
-        required
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <input 
-        type="text" 
-        placeholder="Phone" 
-        value={phone} 
-        onChange={(e) => setPhone(e.target.value)} 
-        required
+      <input
+        type="text"
+        placeholder="Phone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
       />
-      <button type="submit">{editContact ? 'Update Contact' : 'Add Contact'}</button>
+      <button type="submit">{isAddMode ? 'Add Contact' : 'Update Contact'}</button>
     </form>
   );
 }
 
 export default ContactForm;
+
+
+
+
+

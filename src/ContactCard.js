@@ -6,6 +6,7 @@ function ContactCard({ contact, deleteContact }) {
       <p>Name: {contact.name}</p>
       <p>Email: {contact.email}</p>
       <p>Phone: {contact.phone}</p>
+      <button onClick={() => setEditContact(contact)}>Edit</button>
       <button onClick={() => deleteContact(contact.id)}>Delete</button>
     </div>
   );

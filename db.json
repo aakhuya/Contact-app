@@ -1,10 +1,10 @@
 {
   "contacts": [
     {
-      "name": "Alice Mupa",
+      "id": "1",
+      "name": "Alice Muthoni",
       "email": "alicemuthoni2@gmail.com",
-      "phone": "254 71782350",
-      "id": "1"
+      "phone": "254 71782359"
     },
     {
       "id": "2",
@@ -19,10 +19,16 @@
       "phone": "254 79792947"
     },
     {
-      "id": "4",
-      "name": "Peter Roch",
-      "email": "rochpeter1@gmail.com",
-      "phone": "254 73402951"
+      "id": "e43f",
+      "name": "Namwel Vulu",
+      "email": "vulunamwel@gmail.com",
+      "phone": "23450987665"
+    },
+    {
+      "id": "b203",
+      "name": "Kora Loni",
+      "email": "lonikora@gmail.com",
+      "phone": "2546887898"
     }
   ]
 }
