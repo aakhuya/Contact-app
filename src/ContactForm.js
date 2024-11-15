@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-function ContactForm({ addOrUpdateContact, editContact, setEditContact, isAddMode }) {
+function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (editContact) {
@@ -35,15 +33,10 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact, isAddMod
     setEmail('');
     setPhone('');
     setEditContact(null);
-
-    if (isAddMode) {
-      navigate('/');
-    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="contact-form">
-      <h2>{isAddMode ? 'Add a New Contact' : 'Edit Contact'}</h2>
       <input
         type="text"
         placeholder="Name"
@@ -62,12 +55,19 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact, isAddMod
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
-      <button type="submit">{isAddMode ? 'Add Contact' : 'Update Contact'}</button>
+
+      <button
+        type="submit"
+        className={editContact ? 'edit-button' : 'add-contact-button'}
+      >
+        {editContact ? 'Update Contact' : 'Add Contact'}
+      </button>
     </form>
   );
 }
 
 export default ContactForm;
+
 
 
 
