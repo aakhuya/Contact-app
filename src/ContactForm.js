@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
 function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');  // State for success message
+
+  const navigate = useNavigate();  // Initialize the useNavigate hook
 
   useEffect(() => {
     if (editContact) {
@@ -17,7 +21,7 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
     }
   }, [editContact]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const contact = {
@@ -27,12 +31,16 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
       phone,
     };
 
-    addOrUpdateContact(contact);
+    // Add or update the contact
+    await addOrUpdateContact(contact);
 
-    setName('');
-    setEmail('');
-    setPhone('');
-    setEditContact(null);
+    // Display success message
+    setSuccessMessage(editContact ? 'Contact updated successfully!' : 'Contact added successfully!');
+
+    // Redirect to the homepage after a short delay
+    setTimeout(() => {
+      navigate('/');  // Navigate back to homepage
+    }, 1500);  // Delay before redirect to show the success message
   };
 
   return (
@@ -55,6 +63,9 @@ function ContactForm({ addOrUpdateContact, editContact, setEditContact }) {
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
+      
+      {/* Show success message if the contact was added or updated */}
+      {successMessage && <div className="success-message">{successMessage}</div>}
 
       <button
         type="submit"

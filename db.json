@@ -1,14 +1,14 @@
 {
   "contacts": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Alice Muthoni",
       "email": "alicemuthoni2@gmail.com",
-      "phone": "254 71782359"
+      "phone": "254 71782350"
     },
     {
       "id": "2",
-      "name": "Bob Junior",
+      "name": "Bob Jose",
       "email": "junior.bob@outlook.com",
       "phone": "254 72682339"
     },
